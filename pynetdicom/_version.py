@@ -10,7 +10,7 @@ Parts of `extract_components` are taken from the pypa packaging project
 import re
 
 
-__version__ = '1.5.7'
+__version__ = "1.5.7.01"
 
 
 VERSION_PATTERN = r"""
@@ -48,11 +48,13 @@ VERSION_PATTERN = r"""
 def is_canonical(version):
     """Return True if `version` is a PEP440 conformant version."""
     match = re.match(
-        r'^([1-9]\d*!)?(0|[1-9]\d*)'
-        r'(\.(0|[1-9]\d*))'
-        r'*((a|b|rc)(0|[1-9]\d*))'
-        r'?(\.post(0|[1-9]\d*))'
-        r'?(\.dev(0|[1-9]\d*))?$', version)
+        r"^([1-9]\d*!)?(0|[1-9]\d*)"
+        r"(\.(0|[1-9]\d*))"
+        r"*((a|b|rc)(0|[1-9]\d*))"
+        r"?(\.post(0|[1-9]\d*))"
+        r"?(\.dev(0|[1-9]\d*))?$",
+        version,
+    )
 
     return match is not None
 
@@ -60,13 +62,10 @@ def is_canonical(version):
 def extract_components(version):
     """Return the components from `version` as a dict"""
     if not is_canonical(version):
-        raise ValueError(
-            "The supplied `version` is not conformant with PEP440"
-        )
+        raise ValueError("The supplied `version` is not conformant with PEP440")
 
     _regex = re.compile(
-        r"^\s*" + VERSION_PATTERN + r"\s*$",
-        re.VERBOSE | re.IGNORECASE,
+        r"^\s*" + VERSION_PATTERN + r"\s*$", re.VERBOSE | re.IGNORECASE,
     )
     match = _regex.search(version)
 
@@ -76,20 +75,22 @@ def extract_components(version):
 
     _post = None
     if match.group("post_l"):
-        _post = (match.group("post_l"),
-                 int(match.group("post_n1") or match.group("post_n2")))
+        _post = (
+            match.group("post_l"),
+            int(match.group("post_n1") or match.group("post_n2")),
+        )
 
     _dev = None
     if match.group("dev_l"):
         _dev = (match.group("dev_l"), int(match.group("dev_n")))
 
     components = {
-        'epoch' : int(match.group("epoch")) if match.group("epoch") else 0,
-        'release' : tuple(int(ii) for ii in match.group("release").split(".")),
-        'pre' : _pre,
-        'post' : _post,
-        'dev' : _dev,
-        'local' : match.group("local"),
+        "epoch": int(match.group("epoch")) if match.group("epoch") else 0,
+        "release": tuple(int(ii) for ii in match.group("release").split(".")),
+        "pre": _pre,
+        "post": _post,
+        "dev": _dev,
+        "local": match.group("local"),
     }
 
     return components
