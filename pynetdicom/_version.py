@@ -10,7 +10,7 @@ Parts of `extract_components` are taken from the pypa packaging project
 import re
 
 
-__version__ = "1.5.7.post1"
+__version__ = "1.5.7.post2"
 
 
 VERSION_PATTERN = r"""

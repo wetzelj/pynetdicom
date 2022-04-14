@@ -403,6 +403,7 @@ _STORAGE_CLASSES = {
     "RTBeamsDeliveryInstructionStorage": "1.2.840.10008.5.1.4.34.7",  # A.64
     "RTBrachyApplicationSetupDeliveryInstructionsStorage": "1.2.840.10008.5.1.4.34.10",  # A.79
     "SiemensPrivateSOPClassUID": "1.3.12.2.1107.5.9.1",
+    # "AgfaChangeContext": "1.2.124.113532.3500.7",
 }
 _STORAGE_COMMITMENT_CLASSES = {
     "StorageCommitmentPushModelSOPClass": "1.2.840.10008.1.20.1",
