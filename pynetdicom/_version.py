@@ -4,7 +4,7 @@ import re
 
 
 # pynetdicom version
-__version__ = "2.0.3"
+__version__ = "2.0.3.post1"
 
 # DICOM Standard version used for SOP classes and instances
 __dicom_version__: str = "2021e"
